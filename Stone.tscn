@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1l66kkjrvfbi"]
+
+[ext_resource type="Texture2D" uid="uid://uyths4wm70p5" path="res://monochrome_tilemap_transparent_packed.png" id="1_oi6ui"]
+[ext_resource type="Script" path="res://Stone.gd" id="1_un7rj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00uuf"]
+size = Vector2(12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlxhj"]
+atlas = ExtResource("1_oi6ui")
+region = Rect2(240, 288, 16, 16)
+
+[node name="Stone" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_un7rj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_00uuf")
+
+[node name="base" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.156863)
+texture = SubResource("AtlasTexture_wlxhj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.964706, 0.843137, 0.419608, 1)
+texture = SubResource("AtlasTexture_wlxhj")
