@@ -7,6 +7,48 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ppu46"]
 size = Vector2(16, 15)
 
+[sub_resource type="Animation" id="Animation_k15lg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sp:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rrq3t"]
+resource_name = "end"
+length = 4.0
+
+[sub_resource type="Animation" id="Animation_1oqr0"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sp:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4o35y"]
+_data = {
+"RESET": SubResource("Animation_k15lg"),
+"end": SubResource("Animation_rrq3t"),
+"idle": SubResource("Animation_1oqr0")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ra6ua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h53gi"]
@@ -24,47 +66,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_k15lg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("end_text:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.996078, 1, 0.984314, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_rrq3t"]
-resource_name = "end"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("end_text:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(2, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.996078, 1, 0.984314, 0), Color(0.996078, 1, 0.984314, 0.588235)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4o35y"]
-_data = {
-"RESET": SubResource("Animation_k15lg"),
-"end": SubResource("Animation_rrq3t")
-}
-
-[sub_resource type="LabelSettings" id="LabelSettings_7ky0t"]
-line_spacing = 2.0
-font_size = 7
-
 [node name="Hero" type="Area2D"]
 z_index = 10
 position = Vector2(0, 1)
@@ -72,13 +73,7 @@ collision_mask = 254
 script = ExtResource("1_jvyhp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_ppu46")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_ra6ua")
-sprite_frames = SubResource("SpriteFrames_be0ki")
-animation = &"new_animation"
 
 [node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_160sa")
@@ -95,17 +90,15 @@ collide_with_bodies = false
 libraries = {
 "": SubResource("AnimationLibrary_4o35y")
 }
+autoplay = "idle"
 
-[node name="end_text" type="Label" parent="."]
-modulate = Color(0.996078, 1, 0.984314, 0)
-offset_left = -72.0
-offset_top = 8.0
-offset_right = 72.0
-offset_bottom = 48.0
-text = "
-you did it!
-thank you for playing :D"
-label_settings = SubResource("LabelSettings_7ky0t")
-horizontal_alignment = 1
+[node name="sp" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 8)
+
+[node name="sp2d" type="AnimatedSprite2D" parent="sp"]
+material = SubResource("ShaderMaterial_ra6ua")
+sprite_frames = SubResource("SpriteFrames_be0ki")
+animation = &"new_animation"
+offset = Vector2(2.08165e-12, -8)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

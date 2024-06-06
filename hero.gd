@@ -4,7 +4,8 @@ signal hit
 @export var move_slide = true
 
 @onready var tile_map: TileMap = $"../TileMap"
-@onready var sprite = $AnimatedSprite2D
+@onready var sprite_container = $sp
+@onready var sprite = $sp/sp2d
 @onready var sfx_jump = $sfx_jump
 @onready var ray = $RayCast2D
 @onready var end_text = $end_text
@@ -40,8 +41,10 @@ func _process(_delta):
 		move(Vector2.UP)
 	elif Input.is_action_just_pressed("right"):
 		move(Vector2.RIGHT)
+		sprite.flip_h = false
 	elif Input.is_action_just_pressed("left"):
 		move(Vector2.LEFT)
+		sprite.flip_h = true
 	
 func _physics_process(delta):
 	if sprite.scale != Vector2(1,1):

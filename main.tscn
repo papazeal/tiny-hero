@@ -149,5 +149,6 @@ color = Color(0.378445, 0.441223, 0.692089, 1)
 color_ramp = SubResource("Gradient_ilba5")
 
 [node name="Camera2D" type="Camera2D" parent="Hero"]
+zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
