@@ -41,10 +41,8 @@ func _process(_delta):
 		move(Vector2.UP)
 	elif Input.is_action_just_pressed("right"):
 		move(Vector2.RIGHT)
-		sprite.flip_h = false
 	elif Input.is_action_just_pressed("left"):
 		move(Vector2.LEFT)
-		sprite.flip_h = true
 	
 func _physics_process(delta):
 	if sprite.scale != Vector2(1,1):
@@ -77,7 +75,11 @@ func move(direction: Vector2i):
 		if tile_map.get_cell_tile_data(0, target_tile + direction):
 			target_tile += direction
 	
-	
+	# face direction
+	if direction == Vector2i.RIGHT:
+		sprite.flip_h = false
+	if direction == Vector2i.LEFT:
+		sprite.flip_h = true
 	
 	# start moving
 	next_position = tile_map.map_to_local(target_tile)
