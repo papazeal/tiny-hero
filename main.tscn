@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bolib6fieww0"]
+[gd_scene load_steps=13 format=3 uid="uid://bolib6fieww0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fbeu5"]
 [ext_resource type="PackedScene" uid="uid://2dr7kitpuk60" path="res://Hero.tscn" id="1_hrt7c"]
@@ -112,17 +112,54 @@ texture = ExtResource("3_atbpn")
 [sub_resource type="TileSet" id="TileSet_rbyq2"]
 sources/0 = SubResource("TileSetAtlasSource_fnj3h")
 
-[sub_resource type="Gradient" id="Gradient_ilba5"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
 [sub_resource type="Gradient" id="Gradient_fx8y6"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 0.329412, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5i4ue"]
 gradient = SubResource("Gradient_fx8y6")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.793578, 0.178899)
+fill_to = Vector2(0.766055, 0.266055)
+
+[sub_resource type="Animation" id="Animation_y2cbg"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x01wo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7luh8"]
+_data = {
+"RESET": SubResource("Animation_x01wo"),
+"idle": SubResource("Animation_y2cbg")
+}
+
+[sub_resource type="Gradient" id="Gradient_ilba5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fbeu5")
@@ -134,12 +171,22 @@ format = 2
 layer_0/name = "ground"
 layer_0/tile_data = PackedInt32Array(1900547, 393216, 1, 1966083, 393216, 2, 2031619, 393216, 0, 2097155, 393216, 1, 1900548, 458752, 1, 1966084, 458752, 2, 2031620, 458752, 0, 2097156, 458752, 1, 1900549, 524288, 1, 1966085, 524288, 2, 2031621, 524288, 0, 2097157, 524288, 1, 1900550, 589824, 1, 1966086, 589824, 2, 2031622, 589824, 0, 2097158, 589824, 1, 1900551, 393216, 1, 1966087, 393216, 2, 2031623, 393216, 0, 2097159, 393216, 1, 2162691, 393216, 0, 2162692, 458752, 0, 2162693, 524288, 0, 2162694, 589824, 0, 2162695, 393216, 0)
 layer_1/name = "wall"
-layer_1/tile_data = PackedInt32Array()
+layer_1/tile_data = PackedInt32Array(1835011, 131072, 0, 1835012, 196608, 0, 1835013, 262144, 0, 1835014, 65536, 0, 1835015, 131072, 0)
 layer_2/name = "decoration"
-layer_2/tile_data = PackedInt32Array()
+layer_2/tile_data = PackedInt32Array(1835013, 0, 9)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(88, 456)
+texture = SubResource("GradientTexture2D_5i4ue")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7luh8")
+}
+autoplay = "idle"
 
 [node name="Hero" parent="." instance=ExtResource("1_hrt7c")]
-position = Vector2(72, 504)
+position = Vector2(96, 512)
 move_slide = false
 metadata/_edit_group_ = true
 
@@ -163,4 +210,5 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
 [node name="PointLight2D" type="PointLight2D" parent="Hero"]
+visible = false
 texture = SubResource("GradientTexture2D_5i4ue")
