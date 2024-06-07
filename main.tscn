@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bolib6fieww0"]
+[gd_scene load_steps=10 format=3 uid="uid://bolib6fieww0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fbeu5"]
 [ext_resource type="PackedScene" uid="uid://2dr7kitpuk60" path="res://Hero.tscn" id="1_hrt7c"]
@@ -115,6 +115,15 @@ sources/0 = SubResource("TileSetAtlasSource_fnj3h")
 [sub_resource type="Gradient" id="Gradient_ilba5"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_fx8y6"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i4ue"]
+gradient = SubResource("Gradient_fx8y6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.793578, 0.178899)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fbeu5")
 
@@ -152,3 +161,6 @@ color_ramp = SubResource("Gradient_ilba5")
 zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Hero"]
+texture = SubResource("GradientTexture2D_5i4ue")
