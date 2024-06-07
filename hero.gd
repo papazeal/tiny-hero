@@ -67,13 +67,8 @@ func move(direction: Vector2i):
 	
 	#get target tile
 	var target_tile: Vector2i = current_tile
-	#var walkable = false
-	if move_slide:
-		while tile_map.get_cell_tile_data(0, target_tile + direction):
-			target_tile += direction
-	else:
-		if tile_map.get_cell_tile_data(0, target_tile + direction):
-			target_tile += direction
+	if tile_map.get_cell_tile_data(0, target_tile + direction):
+		target_tile += direction
 	
 	# face direction
 	if direction == Vector2i.RIGHT:
@@ -83,6 +78,8 @@ func move(direction: Vector2i):
 	
 	# start moving
 	next_position = tile_map.map_to_local(target_tile)
+	
+	# moving animation
 	if direction == Vector2i.UP or direction == Vector2i.DOWN:
 		sprite.scale = Vector2(0.6,1.5)
 	else:
