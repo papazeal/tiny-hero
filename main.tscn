@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bolib6fieww0"]
+[gd_scene load_steps=15 format=3 uid="uid://bolib6fieww0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fbeu5"]
 [ext_resource type="PackedScene" uid="uid://2dr7kitpuk60" path="res://Hero.tscn" id="1_hrt7c"]
 [ext_resource type="Texture2D" uid="uid://bn8i7qbi25ig0" path="res://Dungeon_Tileset.png" id="3_atbpn"]
+[ext_resource type="Texture2D" uid="uid://bck5lceg26yrc" path="res://light.png" id="3_xsn5m"]
+[ext_resource type="PackedScene" uid="uid://b1l66kkjrvfbi" path="res://Stone.tscn" id="6_6nsl1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p451o"]
 
@@ -112,15 +114,6 @@ texture = ExtResource("3_atbpn")
 [sub_resource type="TileSet" id="TileSet_rbyq2"]
 sources/0 = SubResource("TileSetAtlasSource_fnj3h")
 
-[sub_resource type="Gradient" id="Gradient_fx8y6"]
-colors = PackedColorArray(1, 1, 1, 0.329412, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i4ue"]
-gradient = SubResource("Gradient_fx8y6")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.766055, 0.266055)
-
 [sub_resource type="Animation" id="Animation_y2cbg"]
 resource_name = "idle"
 loop_mode = 1
@@ -161,6 +154,15 @@ _data = {
 [sub_resource type="Gradient" id="Gradient_ilba5"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_fx8y6"]
+colors = PackedColorArray(1, 1, 1, 0.329412, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i4ue"]
+gradient = SubResource("Gradient_fx8y6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.766055, 0.266055)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fbeu5")
 
@@ -177,7 +179,9 @@ layer_2/tile_data = PackedInt32Array(1835013, 0, 9)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(88, 456)
-texture = SubResource("GradientTexture2D_5i4ue")
+color = Color(0.996656, 0.763277, 0.409938, 1)
+texture = ExtResource("3_xsn5m")
+texture_scale = 0.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
 libraries = {
@@ -186,7 +190,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="Hero" parent="." instance=ExtResource("1_hrt7c")]
-position = Vector2(96, 512)
+position = Vector2(88, 520)
 move_slide = false
 metadata/_edit_group_ = true
 
@@ -212,3 +216,9 @@ position_smoothing_speed = 10.0
 [node name="PointLight2D" type="PointLight2D" parent="Hero"]
 visible = false
 texture = SubResource("GradientTexture2D_5i4ue")
+
+[node name="Stone" parent="." instance=ExtResource("6_6nsl1")]
+position = Vector2(56, 504)
+
+[node name="Stone2" parent="." instance=ExtResource("6_6nsl1")]
+position = Vector2(120, 536)
