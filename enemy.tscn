@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0ugn0ohe8uke"]
+[gd_scene load_steps=15 format=3 uid="uid://c0ugn0ohe8uke"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_vqj2b"]
+[ext_resource type="Shader" path="res://flash.gdshader" id="2_2b1uv"]
 [ext_resource type="Texture2D" uid="uid://dgv8dm3ihhqax" path="res://images/Dungeon_Enemy_v2.png" id="2_gd5lu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gfceg"]
+resource_local_to_scene = true
+shader = ExtResource("2_2b1uv")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47myh"]
 atlas = ExtResource("2_gd5lu")
@@ -20,6 +26,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_84liv"]
 resource_name = "idle"
+length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -28,10 +35,10 @@ tracks/0/path = NodePath("sp:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(1, 1), Vector2(1, 1.1), Vector2(1, 1)]
+"values": [Vector2(1, 0.95), Vector2(1, 1), Vector2(1, 1.05), Vector2(1, 1), Vector2(1, 0.95)]
 }
 
 [sub_resource type="Animation" id="Animation_c7qa0"]
@@ -49,23 +56,65 @@ tracks/0/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_yo2x5"]
+resource_name = "flash"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nr3ty"]
 _data = {
 "RESET": SubResource("Animation_c7qa0"),
+"flash": SubResource("Animation_yo2x5"),
 "idle": SubResource("Animation_84liv")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e6f3h"]
 size = Vector2(16, 16)
 
+[sub_resource type="Animation" id="Animation_ax7cd"]
+resource_name = "flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sp/Sprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_um64p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sp/Sprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mk2eb"]
+_data = {
+"RESET": SubResource("Animation_um64p"),
+"flash": SubResource("Animation_ax7cd")
+}
+
 [node name="Enemy" type="Area2D"]
-collision_layer = 8
+collision_layer = 128
 script = ExtResource("1_vqj2b")
 
 [node name="sp" type="Node2D" parent="."]
 position = Vector2(2.08165e-12, 8)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="sp"]
+material = SubResource("ShaderMaterial_gfceg")
 sprite_frames = SubResource("SpriteFrames_m3yx0")
 offset = Vector2(2.08165e-12, -8)
 
@@ -74,7 +123,13 @@ libraries = {
 "": SubResource("AnimationLibrary_nr3ty")
 }
 autoplay = "idle"
+speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_e6f3h")
+
+[node name="flashAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mk2eb")
+}

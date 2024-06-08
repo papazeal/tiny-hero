@@ -70,6 +70,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="switch"
 2d_physics/layer_6="checkpoint"
 2d_physics/layer_7="goal"
+2d_physics/layer_8="enemy"
 
 [rendering]
 

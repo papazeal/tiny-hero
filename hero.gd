@@ -175,6 +175,13 @@ func _on_area_entered(area):
 		is_moving = true
 		animation.play('end')
 		print_debug('goal hit')
+	if area.get_collision_layer_value(8):
+		print_debug('enemy hit')
+		var enemy:Enemy = area
+		enemy.get_hit()
+		sfx_jump.pitch_scale = 2.5
+		sfx_jump.play()
+		next_position = tile_map.map_to_local(tile_map.local_to_map(global_position))
 	
 	
 	pass # Replace with function body.
