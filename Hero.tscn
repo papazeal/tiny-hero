@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://2dr7kitpuk60"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_jvyhp"]
-[ext_resource type="Texture2D" uid="uid://d3n4cbqlrp3j4" path="res://Dungeon_Character_2.png" id="2_7tcar"]
+[ext_resource type="Texture2D" uid="uid://dgv8dm3ihhqax" path="res://images/Dungeon_Enemy_v2.png" id="3_fammn"]
 [ext_resource type="AudioStream" uid="uid://dl6hmclovsnvm" path="res://bit.wav" id="4_160sa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ppu46"]
@@ -38,7 +38,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(1, 1.1), Vector2(1, 1), Vector2(1, 1.1)]
 }
 
@@ -51,15 +51,15 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ra6ua"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h53gi"]
-atlas = ExtResource("2_7tcar")
-region = Rect2(64, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdanq"]
+atlas = ExtResource("3_fammn")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_be0ki"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h53gi")
+"texture": SubResource("AtlasTexture_vdanq")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -99,6 +99,8 @@ position = Vector2(2.08165e-12, 8)
 material = SubResource("ShaderMaterial_ra6ua")
 sprite_frames = SubResource("SpriteFrames_be0ki")
 animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.0145383
 offset = Vector2(2.08165e-12, -8)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,17 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://c0ugn0ohe8uke"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_vqj2b"]
-[ext_resource type="Texture2D" uid="uid://d3n4cbqlrp3j4" path="res://Dungeon_Character_2.png" id="2_3gkuy"]
+[ext_resource type="Texture2D" uid="uid://dgv8dm3ihhqax" path="res://images/Dungeon_Enemy_v2.png" id="2_gd5lu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xed21"]
-atlas = ExtResource("2_3gkuy")
-region = Rect2(16, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_47myh"]
+atlas = ExtResource("2_gd5lu")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m3yx0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xed21")
+"texture": SubResource("AtlasTexture_47myh")
 }],
 "loop": true,
 "name": &"default",
@@ -30,7 +30,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(1, 1), Vector2(1, 1.1), Vector2(1, 1)]
 }
 
