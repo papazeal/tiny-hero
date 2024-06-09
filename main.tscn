@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bolib6fieww0"]
+[gd_scene load_steps=16 format=3 uid="uid://bolib6fieww0"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fbeu5"]
 [ext_resource type="PackedScene" uid="uid://2dr7kitpuk60" path="res://Hero.tscn" id="1_hrt7c"]
 [ext_resource type="Texture2D" uid="uid://bn8i7qbi25ig0" path="res://Dungeon_Tileset.png" id="3_atbpn"]
 [ext_resource type="Texture2D" uid="uid://cp0j4uinn7a06" path="res://images/Dungeon_Tileset_v2.png" id="3_qq8xh"]
 [ext_resource type="Texture2D" uid="uid://bck5lceg26yrc" path="res://light.png" id="3_xsn5m"]
-[ext_resource type="PackedScene" uid="uid://c0ugn0ohe8uke" path="res://enemy.tscn" id="6_h5oqr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p451o"]
 
@@ -219,6 +218,21 @@ texture = ExtResource("3_qq8xh")
 sources/0 = SubResource("TileSetAtlasSource_fnj3h")
 sources/1 = SubResource("TileSetAtlasSource_bcvmi")
 
+[sub_resource type="Animation" id="Animation_x01wo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_y2cbg"]
 resource_name = "idle"
 loop_mode = 1
@@ -233,21 +247,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_x01wo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7luh8"]
@@ -278,17 +277,17 @@ format = 2
 layer_0/name = "ground"
 layer_0/tile_data = PackedInt32Array(1900547, 524289, 5, 1966083, 524289, 6, 2031619, 524289, 5, 2097155, 524289, 6, 1900548, 589825, 5, 1966084, 589825, 6, 2031620, 589825, 5, 2097156, 589825, 6, 1900549, 458753, 5, 1966085, 458753, 6, 2031621, 458753, 5, 2097157, 458753, 6, 1900550, 524289, 5, 1966086, 524289, 6, 2031622, 524289, 5, 2097158, 524289, 6, 1900551, 589825, 5, 1966087, 589825, 6, 2031623, 589825, 5, 2097159, 589825, 6, 2162691, 524289, 5, 2162692, 589825, 5, 2162693, 458753, 5, 2162694, 524289, 5, 2162695, 589825, 5, 1900546, 458753, 5, 1966082, 458753, 6, 2031618, 458753, 5, 2097154, 458753, 6, 2162690, 458753, 5, 2228226, 458753, 6, 2228227, 524289, 6, 2228228, 589825, 6, 2228229, 458753, 6, 2228230, 524289, 6, 2228231, 589825, 6, 2228232, 458753, 6, 1900552, 458753, 5, 1966088, 458753, 6, 2031624, 458753, 5, 2097160, 458753, 6, 2162696, 458753, 5)
 layer_1/name = "wall"
-layer_1/tile_data = PackedInt32Array(1835011, 131073, 0, 1835012, 196609, 0, 1835013, 131073, 8, 1835014, 65537, 0, 1835015, 131073, 0, 1835010, 65537, 0, 1835016, 196609, 0)
+layer_1/tile_data = PackedInt32Array(1835011, 131073, 8, 1835012, 196609, 0, 1835013, 131073, 8, 1835014, 65537, 0, 1835015, 131073, 8, 1835010, 65537, 0, 1835016, 196609, 0, 1835009, 1, 0, 1900545, 1, 1, 1966081, 1, 2, 2031617, 1, 3, 2097153, 1, 0, 2162689, 1, 1, 2228225, 1, 2, 2293761, 1, 4, 2293762, 65537, 4, 2293763, 131073, 4, 2293764, 196609, 4, 2293765, 262145, 4, 2293766, 65537, 4, 2293767, 131073, 4, 2293768, 196609, 4, 2293769, 327681, 4, 1835017, 327681, 1, 1900553, 327681, 2, 1966089, 327681, 3, 2031625, 327681, 0, 2097161, 327681, 1, 2162697, 327681, 2, 2228233, 327681, 3)
 layer_2/name = "decoration"
 layer_2/tile_data = PackedInt32Array()
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(88, 456)
 color = Color(0.996656, 0.763277, 0.409938, 1)
 texture = ExtResource("3_xsn5m")
 texture_scale = 0.2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D2"]
 libraries = {
 "": SubResource("AnimationLibrary_7luh8")
 }
@@ -314,13 +313,10 @@ color = Color(0.378445, 0.441223, 0.692089, 1)
 color_ramp = SubResource("Gradient_ilba5")
 
 [node name="Camera2D" type="Camera2D" parent="Hero"]
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
 [node name="PointLight2D" type="PointLight2D" parent="Hero"]
 visible = false
 texture = SubResource("GradientTexture2D_5i4ue")
-
-[node name="Enemy" parent="." instance=ExtResource("6_h5oqr")]
-position = Vector2(120, 488)
